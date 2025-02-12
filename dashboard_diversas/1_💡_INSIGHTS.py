@@ -1,5 +1,3 @@
-from turtle import onclick
-from click import group
 import streamlit as st
 import os
 import pandas as pd
