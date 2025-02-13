@@ -1,13 +1,17 @@
 import pandas as pd
 import os
-import locale
-
-locale.setlocale(locale.LC_ALL, "pt_BR.UTF-8")
 
 
 def formatar_moeda(valor, simbolo=True):
-    """Formata um valor monetário em reais (R$)."""
-    return locale.currency(valor, grouping=True, symbol=simbolo)
+    """Formata um valor monetário em reais (R$) sem depender do locale."""
+    if valor is None:
+        return "R$ 0,00" if simbolo else "0,00"
+
+    valor_formatado = (
+        f"{valor:,.2f}".replace(",", "X").replace(".", ",").replace("X", ".")
+    )
+
+    return f"R$ {valor_formatado}" if simbolo else valor_formatado
 
 
 def formatar_float(valor):
